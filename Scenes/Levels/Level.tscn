@@ -1,7 +1,9 @@
-[gd_scene load_steps=43 format=2]
+[gd_scene load_steps=45 format=2]
 
 [ext_resource path="res://Scenes/Characters/Character.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Levels/Tilesets/Tileset.png" type="Texture" id=2]
+[ext_resource path="res://Scenes/InteractiveObjects/Jar/Jar.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/InteractiveObjects/Chest/Chest.tscn" type="PackedScene" id=4]
 
 [sub_resource type="ConvexPolygonShape2D" id=2]
 points = PoolVector2Array( 32, 32, 0, 32, 0, 0, 32, 0 )
@@ -471,7 +473,26 @@ tile_data = PoolIntArray( 0, 4, 65536, 1, 4, 65539, 2, 4, 65539, 3, 4, 65539, 4,
 tile_set = SubResource( 1 )
 cell_size = Vector2( 32, 32 )
 format = 1
-tile_data = PoolIntArray( -65520, 3, 0, 65563, 0, 0, 65565, 2, 0, 65566, 2, 0, 524289, 2, 0, 589825, 2, 0, 1048577, 1, 0, 1048606, 1, 0 )
+tile_data = PoolIntArray( -65520, 3, 0, 1048577, 1, 0, 1048606, 1, 0 )
 
 [node name="Character" parent="." instance=ExtResource( 1 )]
 position = Vector2( 535, 309 )
+
+[node name="Jars" type="Node2D" parent="."]
+
+[node name="Jar" parent="Jars" instance=ExtResource( 3 )]
+position = Vector2( 250, 262 )
+
+[node name="Jar2" parent="Jars" instance=ExtResource( 3 )]
+position = Vector2( 668, 439 )
+
+[node name="Jar3" parent="Jars" instance=ExtResource( 3 )]
+position = Vector2( 687, 234 )
+
+[node name="Chests" type="Node2D" parent="."]
+
+[node name="Chest" parent="Chests" instance=ExtResource( 4 )]
+position = Vector2( 115, 98 )
+
+[node name="Chest2" parent="Chests" instance=ExtResource( 4 )]
+position = Vector2( 937, 373 )

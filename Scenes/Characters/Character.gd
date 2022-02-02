@@ -26,6 +26,7 @@ var direction_dict: Dictionary = {
 var state: int = State.IDLE setget set_state, get_state
 
 onready var animated_sprite: AnimatedSprite = $AnimatedSprite
+onready var attack_hit_box: Area2D = $AttackHitBox
 
 ####################
 ##### SIGNALS ######
@@ -109,6 +110,11 @@ func _update_animation() -> void:
 	if animated_sprite.get_sprite_frames().has_animation(anim_name):
 		animated_sprite.play(anim_name)
 
+# Update the attack hitbox direction based on the current facing direction
+func _update_attack_hitbox_direction() -> void:
+	var angle = facing_direction.angle()
+	attack_hit_box.set_rotation_degrees(rad2deg(angle) - 90)
+
 # Find the name of the given direction and returns it as a string
 func _find_dir_name(dir: Vector2) -> String:
 	var direction_values_array = direction_dict.values()
@@ -122,6 +128,24 @@ func _find_dir_name(dir: Vector2) -> String:
 	
 	return direction_key
 
+func _attack_effect() -> void:
+	var bodies_array = attack_hit_box.get_overlapping_bodies()
+	
+	for body in bodies_array:
+		if body.has_method("destroy"):
+			body.destroy()
+
+func _interaction_attempt() -> bool:
+	var bodies_array = attack_hit_box.get_overlapping_bodies()
+	var attempt_success = false
+	
+	for body in bodies_array:
+		if body.has_method("interact"):
+			body.interact()
+			attempt_success = true
+			
+	return attempt_success
+
 ###############################
 ###### SIGNAL RESPONSES #######
 ###############################
@@ -131,10 +155,15 @@ func _on_AnimatedSprite_animation_finished() -> void:
 		state = State.IDLE
 
 func _on_state_changed() -> void:
+	if state == State.ATTACK:
+		if _interaction_attempt():
+			set_state(State.IDLE)
+			
 	_update_animation()
 
 func _on_facing_direction_changed() -> void:
 	_update_animation()
+	_update_attack_hitbox_direction()
 
 func _on_moving_direction_changed() -> void:
 	if moving_direction == Vector2.ZERO or moving_direction == facing_direction:
@@ -148,3 +177,8 @@ func _on_moving_direction_changed() -> void:
 			set_facing_direction(Vector2(0, sign_dir.y))
 		else:
 			set_facing_direction(Vector2(sign_dir.x, 0))
+
+func _on_AnimatedSprite_frame_changed() -> void:
+	if animated_sprite.animation.begins_with("attack_"):
+		if animated_sprite.get_frame() == 1:
+			_attack_effect()
