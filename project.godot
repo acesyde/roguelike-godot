@@ -8,6 +8,16 @@
 
 config_version=4
 
+_global_script_classes=[ {
+"base": "KinematicBody2D",
+"class": "Character",
+"language": "GDScript",
+"path": "res://Scenes/Characters/Character.gd"
+} ]
+_global_script_class_icons={
+"Character": ""
+}
+
 [application]
 
 config/name="roguelike"
