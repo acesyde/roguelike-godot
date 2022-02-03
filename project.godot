@@ -19,6 +19,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scenes/InteractiveObjects/Chest/Chest.gd"
 }, {
+"base": "Node2D",
+"class": "Coin",
+"language": "GDScript",
+"path": "res://Scenes/InteractiveObjects/Coin/Coin.gd"
+}, {
 "base": "StaticBody2D",
 "class": "Jar",
 "language": "GDScript",
@@ -27,6 +32,7 @@ _global_script_classes=[ {
 _global_script_class_icons={
 "Character": "",
 "Chest": "",
+"Coin": "",
 "Jar": ""
 }
 
@@ -35,6 +41,15 @@ _global_script_class_icons={
 config/name="roguelike"
 run/main_scene="res://Scenes/Levels/Level.tscn"
 config/icon="res://icon.png"
+
+[display]
+
+window/size/width=640
+window/size/height=360
+window/size/borderless=true
+window/size/fullscreen=true
+window/stretch/mode="2d"
+window/stretch/aspect="keep_width"
 
 [importer_defaults]
 
@@ -66,4 +81,5 @@ common/enable_pause_aware_picking=true
 
 [rendering]
 
+2d/snapping/use_gpu_pixel_snap=true
 environment/default_environment="res://default_env.tres"
