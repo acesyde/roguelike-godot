@@ -38,6 +38,9 @@ func collect() -> void:
 	shadow_sprite.set_visible(false)
 	particules.set_emitting(true)
 	audio_stream.play()
+	
+	EVENTS.emit_signal("coin_collected")
+	
 	yield(audio_stream, "finished")
 	queue_free()
 

@@ -24,6 +24,21 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scenes/InteractiveObjects/Coin/Coin.gd"
 }, {
+"base": "Node",
+"class": "Events",
+"language": "GDScript",
+"path": "res://Autoload/Events.gd"
+}, {
+"base": "Node",
+"class": "Game",
+"language": "GDScript",
+"path": "res://Autoload/Game.gd"
+}, {
+"base": "TextureRect",
+"class": "Hud",
+"language": "GDScript",
+"path": "res://Scenes/UI/HUD/HUD.gd"
+}, {
 "base": "StaticBody2D",
 "class": "Jar",
 "language": "GDScript",
@@ -33,6 +48,9 @@ _global_script_class_icons={
 "Character": "",
 "Chest": "",
 "Coin": "",
+"Events": "",
+"Game": "",
+"Hud": "",
 "Jar": ""
 }
 
@@ -41,6 +59,11 @@ _global_script_class_icons={
 config/name="roguelike"
 run/main_scene="res://Scenes/Levels/Level.tscn"
 config/icon="res://icon.png"
+
+[autoload]
+
+GAME="*res://Autoload/Game.gd"
+EVENTS="*res://Autoload/Events.gd"
 
 [display]
 
